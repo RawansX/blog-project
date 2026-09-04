@@ -6,8 +6,8 @@
                 تعديل المقال
             </h1>
 
-            <form method="POST" action="{{ route('posts.update', $post) }}" class="space-y-6">
-                @csrf
+<form method="POST" action="{{ route('posts.update', $post) }}" enctype="multipart/form-data" class="space-y-6">
+                    @csrf
                 @method('PUT')
 
                 @if (auth()->id() === $post->user_id)
@@ -47,6 +47,19 @@
                         @endforeach
                     </select>
                 </div>
+                <div>
+    <label class="block text-sm font-medium text-muted mb-2">صورة المقال (اختياري)</label>
+
+    @if ($post->image)
+        <img src="{{ Storage::url($post->image) }}" alt="صورة المقال" class="w-32 h-32 object-cover rounded-lg mb-3">
+    @endif
+
+    <input type="file" name="image" accept="image/*"
+           class="w-full text-sm text-muted file:me-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-sky-light file:text-sky">
+    @error('image')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
+</div>
 
                 <div class="flex justify-end pt-4 border-t border-gray-100">
                     <button type="submit" class="bg-navy text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-navy-dark transition">

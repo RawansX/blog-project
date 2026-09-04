@@ -48,9 +48,14 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'nullable|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $validated['user_id'] = auth()->id();
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('posts', 'public');
+        }
 
         Post::create($validated);
 
@@ -89,7 +94,12 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'nullable|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
         ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('posts', 'public');
+        }
 
         $post->update($validated);
 

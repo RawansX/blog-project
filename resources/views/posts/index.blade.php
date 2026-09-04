@@ -24,6 +24,10 @@
 
             @forelse ($posts as $post)
                 <article class="border-e-4 border-navy bg-gray-50/50 py-5 px-6 mb-4 rounded-md">
+                    @if ($post->image)
+    <img src="{{ Storage::url($post->image) }}" alt="{{ $post->title }}"
+         class="w-full h-40 object-cover rounded-lg mb-3">
+@endif
                     <h2 class="font-serif text-2xl font-semibold text-ink leading-snug">
                         <a href="{{ route('posts.show', $post) }}" class="hover:text-sky transition">
                             {{ $post->title }}

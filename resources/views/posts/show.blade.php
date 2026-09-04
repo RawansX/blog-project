@@ -7,6 +7,10 @@
             </a>
 
             <article class="mt-6">
+                @if ($post->image)
+    <img src="{{ Storage::url($post->image) }}" alt="{{ $post->title }}"
+         class="w-full h-64 object-cover rounded-2xl mb-6">
+@endif
                 
 
                 <h1 class="font-serif text-3xl sm:text-4xl font-semibold text-ink leading-tight">

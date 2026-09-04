@@ -6,7 +6,7 @@
                 كتابة مقال جديد
             </h1>
 
-            <form method="POST" action="{{ route('posts.store') }}" class="space-y-6">
+            <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data" class="space-y-6">
                 @csrf
 
                 <div>
@@ -33,6 +33,14 @@
             <option value="{{ $category->id }}">{{ $category->name }}</option>
         @endforeach
     </select>
+</div>
+<div>
+    <label class="block text-sm font-medium text-muted mb-2">صورة المقال (اختياري)</label>
+    <input type="file" name="image" accept="image/*"
+           class="w-full text-sm text-muted file:me-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-sky-light file:text-sky">
+    @error('image')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
 </div>
                 <div class="flex justify-end pt-4 border-t border-gray-100">
                     <button type="submit" class="bg-navy text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-navy-dark transition">
