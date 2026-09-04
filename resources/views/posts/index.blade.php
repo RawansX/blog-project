@@ -8,8 +8,22 @@
                 </p>
             @endif
 
+            <div class="flex flex-wrap gap-2 mb-8">
+                <a href="{{ route('posts.index') }}"
+                   class="text-sm px-4 py-1.5 rounded-full {{ !request('category') ? 'bg-navy text-white' : 'bg-gray-100 text-muted' }}">
+                    الكل
+                </a>
+
+                @foreach ($categories as $category)
+                    <a href="{{ route('posts.index', ['category' => $category->id]) }}"
+                       class="text-sm px-4 py-1.5 rounded-full {{ request('category') == $category->id ? 'bg-navy text-white' : 'bg-gray-100 text-muted' }}">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
+            </div>
+
             @forelse ($posts as $post)
-                <article class="border-b border-gray-100 py-8">
+                <article class="border-e-4 border-navy bg-gray-50/50 py-5 px-6 mb-4 rounded-md">
                     <h2 class="font-serif text-2xl font-semibold text-ink leading-snug">
                         <a href="{{ route('posts.show', $post) }}" class="hover:text-sky transition">
                             {{ $post->title }}
@@ -30,11 +44,10 @@
                             <span>{{ $post->created_at->diffForHumans() }}</span>
                         </div>
 
-                        @if (auth()->check() && ($post->user_id === auth()->id() || auth()->user()->hasRole('admin')))
-                            <div class="flex gap-3 text-sm">
+@if (auth()->check() && $post->user_id === auth()->id())                            <div class="flex gap-3 text-sm">
                                 <a href="{{ route('posts.edit', $post) }}" class="text-sky">تعديل</a>
                                 <form method="POST" action="{{ route('posts.destroy', $post) }}"
-                                      onsubmit="return confirm('متأكدة تبين تحذفين المقال؟');">
+                                      onsubmit="return confirm('حذف ');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-500">حذف</button>
@@ -44,7 +57,7 @@
                     </div>
                 </article>
             @empty
-                <p class="text-muted text-center py-16">ما فيه مقالات بعد.</p>
+                <p class="text-muted text-center py-16">لايوجد مقالات.</p>
             @endforelse
 
             <div class="mt-8">

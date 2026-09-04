@@ -3,13 +3,11 @@
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
 
             <a href="{{ route('posts.index') }}" class="inline-flex items-center gap-1 text-sm text-sky hover:text-navy transition">
-                العودة للمقالات ←
+                العودة للمقالات
             </a>
 
             <article class="mt-6">
-                <span class="inline-block bg-sky-light text-sky text-xs font-medium px-3 py-1 rounded-full mb-4">
-                    مقال
-                </span>
+                
 
                 <h1 class="font-serif text-3xl sm:text-4xl font-semibold text-ink leading-tight">
                     {{ $post->title }}
@@ -30,15 +28,15 @@
                 </div>
             </article>
 
-            <div class="bg-sky-light/40 rounded-2xl p-6 mt-12">
+            <div class="mt-12">
                 <h3 class="font-serif text-lg font-semibold text-navy mb-6">
                     التعليقات ({{ $post->comments->count() }})
                 </h3>
 
                 <form method="POST" action="{{ route('comments.store', $post) }}" class="mb-6">
                     @csrf
-                    <textarea name="content" rows="3" placeholder="شاركي رأيك بهذا المقال..."
-                              class="w-full rounded-xl border border-gray-200 focus:border-sky focus:ring-sky text-sm shadow-sm bg-white"></textarea>
+                    <textarea name="content" rows="3" placeholder="..."
+                              class="w-full rounded-lg border-gray-200 focus:border-sky focus:ring-sky text-sm resize-none"></textarea>
                     @error('content')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -48,7 +46,7 @@
                 </form>
 
                 @forelse ($post->comments as $comment)
-                    <div class="bg-white rounded-xl p-4 mb-3 flex justify-between items-start shadow-sm">
+                    <div class="border-b border-gray-100 py-4 flex justify-between items-start">
                         <div class="flex gap-3">
                             <span class="flex items-center justify-center h-8 w-8 rounded-full bg-sky text-white text-xs font-medium shrink-0">
                                 {{ mb_substr($comment->user->name, 0, 1) }}
@@ -68,7 +66,7 @@
                         @endif
                     </div>
                 @empty
-                    <p class="text-muted text-sm text-center py-4">كوني أول من يعلّق 💬</p>
+                    <p class="text-muted text-sm text-center py-4" 💬</p>
                 @endforelse
             </div>
 

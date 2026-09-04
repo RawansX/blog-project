@@ -25,7 +25,15 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-
+<div>
+    <label class="block text-sm font-medium text-muted mb-2">التصنيف</label>
+    <select name="category_id" class="w-full border-0 border-b border-gray-200 focus:border-navy focus:ring-0 text-sm bg-transparent px-0">
+        <option value="">بدون تصنيف</option>
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+    </select>
+</div>
                 <div class="flex justify-end pt-4 border-t border-gray-100">
                     <button type="submit" class="bg-navy text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-navy-dark transition">
                         نشر 

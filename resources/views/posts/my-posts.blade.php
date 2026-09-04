@@ -21,7 +21,7 @@
                         <div class="flex gap-2 shrink-0">
                             <a href="{{ route('posts.edit', $post) }}" class="text-sky text-sm">تعديل</a>
                             <form method="POST" action="{{ route('posts.destroy', $post) }}"
-                                  onsubmit="return confirm('متأكدة تبين تحذفين المقال؟');">
+                                  onsubmit="return confirm(' حذف ');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-600 text-sm">حذف</button>
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-muted">ما كتبتِ أي مقال بعد.</p>
+                    <p class="text-muted">لايوجد مقالات .</p>
                 @endforelse
 
                 <div class="mt-4">

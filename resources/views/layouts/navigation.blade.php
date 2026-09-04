@@ -1,16 +1,25 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16 gap-4">
-
+        <div class="flex items-center justify-between h-24 gap-4">
             <a href="{{ route('posts.index') }}" class="font-serif text-2xl text-navy font-semibold whitespace-nowrap">
-                مدونتي
+                مدونة تقنية
             </a>
 
-            <form method="GET" action="{{ route('posts.index') }}" class="hidden sm:flex flex-1 max-w-md">
-                <input type="text" name="search" value="{{ request('search') }}"
-                       placeholder="ابحثي عن مقال..."
-                       class="w-full rounded-full border-gray-200 bg-sky-light/50 text-sm px-4 py-2 focus:border-sky focus:ring-sky">
-            </form>
+           <div class="hidden sm:flex items-center gap-2 flex-1 max-w-md">
+    <form method="GET" action="{{ route('posts.index') }}" class="flex-1">
+        <input type="text" name="search" value="{{ request('search') }}"
+               placeholder="..."
+               class="w-full rounded-full border-gray-200 bg-sky-light/50 text-sm px-4 py-2 focus:border-sky focus:ring-sky">
+    </form>
+
+    <a href="{{ route('posts.index') }}" class="text-sm text-muted hover:text-sky px-3 py-1.5 rounded-full whitespace-nowrap">
+        الكل
+    </a>
+
+    <a href="{{ route('posts.mine') }}" class="text-sm text-muted hover:text-sky px-3 py-1.5 rounded-full whitespace-nowrap">
+        مقالاتي
+    </a>
+</div>
 
             <div class="flex items-center gap-3 shrink-0">
 
@@ -31,7 +40,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">الملف الشخصي</x-dropdown-link>
-                        <x-dropdown-link :href="route('posts.mine')">مقالاتي</x-dropdown-link>
+                        
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-dropdown-link :href="route('logout')"
