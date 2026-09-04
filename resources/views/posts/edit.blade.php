@@ -1,43 +1,39 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('تعديل المقال') }}
-        </h2>
-    </x-slot>
+    <div class="py-10">
+        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
 
-    <div class="py-12">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <h1 class="font-serif text-2xl font-semibold text-ink mb-8">
+                تعديل المقال
+            </h1>
 
-                <form method="POST" action="{{ route('posts.update', $post) }}">
-                    @csrf
-                    @method('PUT')
+            <form method="POST" action="{{ route('posts.update', $post) }}" class="space-y-6">
+                @csrf
+                @method('PUT')
 
-                    <div class="mb-4">
-                        <label class="block font-medium text-sm text-gray-700">العنوان</label>
-                        <input type="text" name="title" value="{{ old('title', $post->title) }}"
-                               class="border-gray-300 rounded-md shadow-sm w-full">
-                        @error('title')
-                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                <div>
+                    <input type="text" name="title" value="{{ old('title', $post->title) }}"
+                           placeholder="عنوان المقال"
+                           class="w-full border-0 border-b border-gray-200 focus:border-navy focus:ring-0 font-serif text-2xl placeholder:text-gray-300 px-0">
+                    @error('title')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
-                    <div class="mb-4">
-                        <label class="block font-medium text-sm text-gray-700">المحتوى</label>
-                        <textarea name="content" rows="6"
-                                  class="border-gray-300 rounded-md shadow-sm w-full">{{ old('content', $post->content) }}</textarea>
-                        @error('content')
-                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                <div>
+                    <textarea name="content" rows="12" placeholder="شاركينا أفكارك..."
+                              class="w-full border-0 focus:ring-0 text-ink leading-loose placeholder:text-gray-300 px-0 resize-none">{{ old('content', $post->content) }}</textarea>
+                    @error('content')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
-                    <button type="submit"
-                            class="bg-gray-800 text-white px-4 py-2 rounded-md">
+                <div class="flex justify-end pt-4 border-t border-gray-100">
+                    <button type="submit" class="bg-navy text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-navy-dark transition">
                         حفظ التعديلات
                     </button>
-                </form>
+                </div>
+            </form>
 
-            </div>
         </div>
     </div>
 </x-app-layout>

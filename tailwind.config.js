@@ -12,7 +12,20 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                serif: ['"Source Serif 4"', ...defaultTheme.fontFamily.serif],
+            },
+            colors: {
+                navy: {
+                    DEFAULT: '#13294B',
+                    dark: '#0B1B33',
+                },
+                sky: {
+                    DEFAULT: '#2D6CDF',
+                    light: '#EAF1FD',
+                },
+                ink: '#101828',
+                muted: '#5B6B82',
             },
         },
     },

@@ -10,9 +10,16 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-public function index()
+public function index(Request $request)
 {
-    $posts = Post::latest()->paginate(10);
+    $posts = Post::when($request->search, function ($query, $search) {
+        $query->where('title', 'LIKE', "%{$search}%")
+              ->orWhere('content', 'LIKE', "%{$search}%");
+    })
+    ->latest()
+    ->paginate(10)
+    ->withQueryString();
+
     return view('posts.index', compact('posts'));
 }
 
@@ -87,5 +94,13 @@ public function destroy(Post $post)
     $post->delete();
 
     return redirect()->route('posts.index');
+}
+public function myPosts()
+{
+    $posts = Post::where('user_id', auth()->id())
+        ->latest()
+        ->paginate(10);
+
+    return view('posts.my-posts', compact('posts'));
 }
 }
