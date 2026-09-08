@@ -14,18 +14,24 @@ class PostApiController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'category_id' => 'nullable|exists:categories,id',
+        'image' => 'nullable|image|max:2048',
+    ]);
 
-        $validated['user_id'] = $request->user()->id;
+    $validated['user_id'] = $request->user()->id;
 
-        $post = Post::create($validated);
-
-        return response()->json($post, 201);
+    if ($request->hasFile('image')) {
+        $validated['image'] = $request->file('image')->store('posts', 'public');
     }
+
+    $post = Post::create($validated);
+
+    return response()->json($post, 201);
+}
 
     public function show(Post $post)
     {

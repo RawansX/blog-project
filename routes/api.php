@@ -11,7 +11,9 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/login', [AuthApiController::class, 'login']);
-
+Route::get('/categories', function () {
+    return \App\Models\Category::all();
+});
 Route::middleware('auth:sanctum')->group(function () {
 Route::apiResource('posts', PostApiController::class)->names('api.posts');
 });

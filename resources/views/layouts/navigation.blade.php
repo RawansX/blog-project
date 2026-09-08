@@ -8,7 +8,7 @@
             <div class="hidden sm:flex items-center gap-2 flex-1 max-w-md">
                 <form method="GET" action="{{ route('posts.index') }}" class="flex-1">
                     <input type="text" name="search" value="{{ request('search') }}"
-                           placeholder="ابحثي عن مقال..."
+                           placeholder="البحث عن مقال..."
                            class="w-full rounded-full border-gray-200 bg-sky-light/50 text-sm px-4 py-2 focus:border-sky focus:ring-sky">
                 </form>
 

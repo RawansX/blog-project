@@ -28,7 +28,7 @@
                     @if ($post->image)
                         <a href="{{ route('posts.show', $post) }}" class="shrink-0">
                             <img src="{{ Storage::url($post->image) }}" alt="{{ $post->title }}"
-                                 class="w-40 h-28 object-cover rounded-lg">
+                                 class="w-32 h-32 object-cover rounded-lg">
                         </a>
                     @endif
 
